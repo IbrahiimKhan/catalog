@@ -11,14 +11,7 @@ export interface NavigationProps extends Partial<ComponentProps<typeof Navigatio
 
 //bottom nav related types
 export type RootNavigatorParamList = {
-    UnAuthenticatedStack: NavigatorScreenParams<UnAuthenticatedStackNavigatorParamList>;
     AuthenticatedStack: NavigatorScreenParams<AuthenticatedStackNavigatorParamList>;
-};
-
-//unauthenticated stack related types
-
-export type UnAuthenticatedStackNavigatorParamList = {
-    Login: undefined;
 };
 
 //authenticated stack related types
@@ -78,10 +71,6 @@ export type AccountStackParamList = {
 export type RootNavigatorScreenProps<T extends keyof RootNavigatorParamList> =
     NativeStackScreenProps<RootNavigatorParamList, T>;
 
-export type UnAuthenticatedStackNavigatorScreenProps<
-    T extends keyof UnAuthenticatedStackNavigatorParamList
-> = NativeStackScreenProps<UnAuthenticatedStackNavigatorParamList, T>;
-
 export type AuthenticatedStackNavigatorScreenProps<
     T extends keyof AuthenticatedStackNavigatorParamList
 > = NativeStackScreenProps<AuthenticatedStackNavigatorParamList, T>;
@@ -99,7 +88,6 @@ declare global {
     namespace ReactNavigation {
         export interface RootParamList
             extends RootNavigatorParamList,
-            UnAuthenticatedStackNavigatorParamList,
             AuthenticatedStackNavigatorParamList,
             HomeStackParamList,
             ServiceStackParamList,
