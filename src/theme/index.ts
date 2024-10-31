@@ -4,7 +4,7 @@ import { createTheme } from '@shopify/restyle';
 import { colors } from './colors';
 import { fontFamily, fontSizes, fontWeights, textVariants } from './variants/text-variants';
 import { iconButtonVariants } from './variants/icon-button-variants';
-
+import { cardVariants } from './variants/card-variants';
 const { width, height } = Dimensions.get('window');
 
 const sizes = {
@@ -18,26 +18,6 @@ const sizes = {
 };
 
 const boxShadow = {
-  // small: {
-  //   shadowColor: colors.black,
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 3.84,
-  //   elevation: 2
-  // },
-  // medium: {
-  //   shadowColor: colors.black,
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 5.84,
-  //   elevation: 5
-  // },
   ...Platform.select({
     ios: {
       shadowColor: colors.secondary100,
@@ -111,6 +91,7 @@ const theme = createTheme({
   zIndices,
   breakpoints,
   iconButtonVariants,
+  cardVariants,
 
 });
 
