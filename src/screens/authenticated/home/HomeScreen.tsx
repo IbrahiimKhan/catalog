@@ -1,6 +1,10 @@
-import { Header } from '@/components';
+/* eslint-disable react/no-unstable-nested-components */
+import { Box, ContentSafeAreaView, Header, ProductCard } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import { useGetProductsQuery } from '@/store/services/apiSlice';
+import theme from '@/theme';
+import { Product } from '@/types/product';
+import { FlashList } from '@shopify/flash-list';
 import React, { ReactElement } from 'react';
 import { ActivityIndicator, SafeAreaView, Text } from 'react-native';
 
@@ -8,33 +12,41 @@ const HomeHeader = (): ReactElement => {
     return (
         <Header>
             <Header.Content title="Hello User" subTitle="Let's start shopping!" />
-            <Header.Action name="bells" type="ant" onPress={() => { }} size={7} />
+            <Header.Action name="bells" type="ant" color="primary" onPress={() => { }} size={7} />
         </Header>
     );
 };
 
 export const HomeScreen = () => {
     useHeader(HomeHeader);
-    const { data: products, error, isLoading } = useGetProductsQuery({ limit: 1 });
-    
+    const { data: products, error, isLoading } = useGetProductsQuery({ limit: 10 });
+
     if (isLoading) {
         return (
-            <SafeAreaView>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </SafeAreaView>
+            <ActivityIndicator size="large" color={theme.colors.black} />
         );
     }
 
     if (error) {
         return (
-            <SafeAreaView>
-                <Text>Error fetching Products</Text>
-            </SafeAreaView>
+            <Text>Error fetching Products</Text>
         );
     }
 
     return (
-        <SafeAreaView />
+        <SafeAreaView style={{ flex: 1 }} >
+            <ContentSafeAreaView flex={1}>
+                <FlashList
+                    ItemSeparatorComponent={() => <Box height={10} />}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    estimatedItemSize={theme.sizes.width / 2}
+                    numColumns={2}
+                    data={products}
+                    renderItem={({ item, index }: { item: Product, index: number }) => <ProductCard product={item} index={index} />}
+                />
+            </ContentSafeAreaView>
+        </SafeAreaView>
     );
 };
 
