@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export const ServiceScreen = () => {
+export const CartScreen = () => {
     return (
         <View>
-            <Text>ServiceScreen</Text>
+            <Text>CartScreen</Text>
         </View>
     );
 };
 
-export default ServiceScreen;
+export default CartScreen;
 

@@ -3,6 +3,7 @@ import { createTheme } from '@shopify/restyle';
 
 import { colors } from './colors';
 import { fontFamily, fontSizes, fontWeights, textVariants } from './variants/text-variants';
+import { iconButtonVariants } from './variants/icon-button-variants';
 
 const { width, height } = Dimensions.get('window');
 
@@ -109,6 +110,7 @@ const theme = createTheme({
   sizes,
   zIndices,
   breakpoints,
+  iconButtonVariants,
 
 });
 

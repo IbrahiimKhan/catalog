@@ -1,12 +1,12 @@
 import React, { type FC } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { ServiceScreen } from '@/screens/authenticated/service';
-import { type BottomTabNavigatorScreenProps, type ServiceStackParamList } from '@/types/navigation';
+import { type BottomTabNavigatorScreenProps, type LocationStackParamList } from '@/types/navigation';
+import { LocationScreen } from '@/screens/authenticated/location';
 
-const Stack = createNativeStackNavigator<ServiceStackParamList>();
+const Stack = createNativeStackNavigator<LocationStackParamList>();
 
-export const ServiceStack: FC<BottomTabNavigatorScreenProps<'ServiceStack'>> = () => {
+export const LocationStack: FC<BottomTabNavigatorScreenProps<'LocationStack'>> = () => {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -14,8 +14,8 @@ export const ServiceStack: FC<BottomTabNavigatorScreenProps<'ServiceStack'>> = (
                 animationDuration: 0,
             }}>
             <Stack.Screen
-                name="Service"
-                component={ServiceScreen}
+                name="Location"
+                component={LocationScreen}
                 options={{
                     headerShown: false,
                 }}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export const FeedScreen = () => {
+export const HistoryScreen = () => {
     return (
         <View>
-            <Text>FeedScreen</Text>
+            <Text>HistoryScreen</Text>
         </View>
     );
 };
 
-export default FeedScreen;
+export default HistoryScreen;
 

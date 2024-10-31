@@ -1,12 +1,12 @@
 import React, { type FC } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { FeedScreen } from '@/screens/authenticated/feed';
-import { type BottomTabNavigatorScreenProps, type AccountStackParamList } from '@/types/navigation';
+import { HistoryScreen } from '@/screens/authenticated/history';
+import { type BottomTabNavigatorScreenProps, type HistoryStackParamList } from '@/types/navigation';
 
-const Stack = createNativeStackNavigator<AccountStackParamList>();
+const Stack = createNativeStackNavigator<HistoryStackParamList>();
 
-export const Account: FC<BottomTabNavigatorScreenProps<'AccountStack'>> = () => {
+export const HistoryStack: FC<BottomTabNavigatorScreenProps<'HistoryStack'>> = () => {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -14,8 +14,8 @@ export const Account: FC<BottomTabNavigatorScreenProps<'AccountStack'>> = () => 
                 animationDuration: 0,
             }}>
             <Stack.Screen
-                name="Account"
-                component={FeedScreen}
+                name="History"
+                component={HistoryScreen}
                 options={{
                     headerShown: false,
                 }}

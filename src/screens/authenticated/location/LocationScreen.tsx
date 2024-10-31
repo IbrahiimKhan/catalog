@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export const Accountscreen = () => {
+export const LocationScreen = () => {
     return (
         <View>
-            <Text>Accountscreen</Text>
+            <Text>LocationScreen</Text>
         </View>
     );
 };
 
-export default Accountscreen;
+export default LocationScreen;

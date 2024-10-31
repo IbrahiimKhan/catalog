@@ -23,9 +23,9 @@ export type AuthenticatedStackNavigatorParamList = {
 //all screen params for bottom tab
 export type BottomTabNavigatorParamList = {
     HomeStack: NavigatorScreenParams<HomeStackParamList>;
-    ServiceStack: NavigatorScreenParams<ServiceStackParamList>;
-    AccountStack: NavigatorScreenParams<AccountStackParamList>;
-    FeedStack: NavigatorScreenParams<FeedStackParamList>;
+    CartStack: NavigatorScreenParams<CartStackParamList>;
+    LocationStack: NavigatorScreenParams<LocationStackParamList>;
+    HistoryStack: NavigatorScreenParams<HistoryStackParamList>;
 };
 
 // 1: home related types
@@ -39,32 +39,32 @@ export type HomeStackScreenProps<T extends keyof HomeStackParamList> = NativeSta
     T
 >;
 
-// 2: service related types
-export type ServiceStackParamList = {
-    Service: undefined;
+// 2: cart related types
+export type CartStackParamList = {
+    Cart: undefined;
 };
 
-export type ServiceStackScreenProps<T extends keyof ServiceStackParamList> =
-    NativeStackScreenProps<ServiceStackParamList, T>;
+export type CartStackScreenProps<T extends keyof CartStackParamList> =
+    NativeStackScreenProps<CartStackParamList, T>;
 
-// 3: feed related types
-export type FeedStackScreenProps<T extends keyof FeedStackParamList> = NativeStackScreenProps<
-    FeedStackParamList,
+// 3: product history related types
+export type HistoryStackScreenProps<T extends keyof HistoryStackParamList> = NativeStackScreenProps<
+    HistoryStackParamList,
     T
 >;
 
-export type FeedStackParamList = {
-    Feed: undefined
+export type HistoryStackParamList = {
+    History: undefined
 };
 
-// 3: Account related types
-export type AccountStackScreenProps<T extends keyof AccountStackParamList> = NativeStackScreenProps<
-    AccountStackParamList,
+// 3: location related types
+export type LocationStackScreenProps<T extends keyof LocationStackParamList> = NativeStackScreenProps<
+    LocationStackParamList,
     T
 >;
 
-export type AccountStackParamList = {
-    Account: undefined
+export type LocationStackParamList = {
+    Location: undefined
 }
 
 //gloabl types
@@ -90,8 +90,8 @@ declare global {
             extends RootNavigatorParamList,
             AuthenticatedStackNavigatorParamList,
             HomeStackParamList,
-            ServiceStackParamList,
-            AccountStackParamList,
-            FeedStackParamList { }
+            CartStackParamList,
+            LocationStackParamList,
+            HistoryStackParamList { }
     }
 }
