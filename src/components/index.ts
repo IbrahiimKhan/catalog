@@ -7,3 +7,5 @@ export * from './ui/layout/HStack';
 export * from './ui/layout/VStack';
 export * from './ui/layout/Card';
 export * from './ui/layout/ContentSafeAreaView';
+export * from './ui/layout/Header';
+export * from './ui/forms/Clickable';
