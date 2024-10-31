@@ -12,4 +12,9 @@ export const iconButtonVariants = {
     contained: {
       backgroundColor: 'black100',
     },
+    default: {
+      alignSelf: 'center',
+      padding: '4',
+      borderRadius: 'rounded-full',
+    },
   };

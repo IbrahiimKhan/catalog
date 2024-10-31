@@ -69,7 +69,7 @@ export const IconButton: FC<IconButtonProps> = ({
                 backgroundColor={
 
                     iconStyle === 'contained' && color
-                        ? ('primary50' as ColorProps<Theme>['color'])
+                        ? (`${color}100` as ColorProps<Theme>['color'])
                         : undefined
                 }
                 opacity={disabled ? 0.3 : 1}
