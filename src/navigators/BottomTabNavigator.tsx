@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, { type FC, type ReactElement } from 'react';
-import { type TextStyle, type ViewStyle } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
     type BottomTabNavigationOptions,
     createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { type RouteProp } from '@react-navigation/native';
+import React, { type FC, type ReactElement } from 'react';
+import { type TextStyle, type ViewStyle } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import theme from '@/theme';
 import {
@@ -16,14 +16,13 @@ import {
 import { useStringHelper } from '@/utils';
 
 //screen stacks
-import { HomeStack } from './stacks/HomeStack';
-import { HistoryStack } from './stacks/HistoryStack';
-import { CartStack } from './stacks/CartStack';
 import { IconButton } from '@/components';
-import { LocationStack } from './stacks/LocationStack';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
-import { CartItem } from '@/types/cart';
+import { CartStack } from './stacks/CartStack';
+import { HistoryStack } from './stacks/HistoryStack';
+import { HomeStack } from './stacks/HomeStack';
+import { LocationStack } from './stacks/LocationStack';
 
 const BottomTabIcon = ({
     focused,
