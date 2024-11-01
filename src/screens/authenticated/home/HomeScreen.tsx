@@ -2,11 +2,17 @@
 import { Box, ContentSafeAreaView, Header, HStack, IconButton, Loader, ProductCard, Text } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import { useGetProductsQuery } from '@/store/services/apiSlice';
+import { setLocation } from '@/store/services/locationSlice';
 import theme from '@/theme';
+import { HomeStackScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
+import Geolocation from '@react-native-community/geolocation';
 import { FlashList } from '@shopify/flash-list';
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { PermissionsAndroid, Platform, SafeAreaView, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+
+interface HomeScreenProps extends HomeStackScreenProps<'Home'> { }
 
 const HomeHeader = () => (
     <Header>
@@ -39,10 +45,51 @@ const SortButtons: React.FC<SortButtonsProps> = ({ sort, onSortChange }) => (
     </HStack>
 );
 
-export const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     useHeader(HomeHeader);
     const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
     const { data: products, error, isLoading } = useGetProductsQuery(qParams);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        const requestLocationPermission = async () => {
+            if (Platform.OS === 'android') {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    {
+                        title: 'Location Permission',
+                        message: 'This app needs access to your location.',
+                        buttonNeutral: 'Ask Me Later',
+                        buttonNegative: 'Cancel',
+                        buttonPositive: 'OK',
+                    }
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    getCurrentLocation();
+                } else {
+                    console.log('Location permission denied');
+                }
+            } else {
+                getCurrentLocation();
+            }
+        };
+
+        const getCurrentLocation = () => {
+            Geolocation.getCurrentPosition(
+                (position) => {
+                    console.log(position);
+                    const { latitude, longitude } = position.coords;
+                    dispatch(setLocation({ latitude, longitude }));
+                },
+                (error: any) => {
+                    console.error(error.message);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+            );
+        };
+        requestLocationPermission();
+    }, [dispatch]);
 
     const handleSortChange = (sortOrder: 'asc' | 'desc') => {
         setQParams({ limit: 10, sort: sortOrder });
@@ -70,7 +117,9 @@ export const HomeScreen: React.FC = () => {
                     estimatedItemSize={theme.sizes.width / 2}
                     numColumns={2}
                     data={products}
-                    renderItem={({ item, index }: { item: Product; index: number }) => <ProductCard product={item} index={index} />}
+                    renderItem={({ item, index }: { item: Product; index: number }) => <ProductCard
+                        onPress={() => navigation.navigate('Product', item)}
+                        product={item} index={index} />}
                 />
             </ContentSafeAreaView>
         </SafeAreaView>

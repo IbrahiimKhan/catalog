@@ -6,6 +6,7 @@ import {
     type NavigatorScreenParams,
 } from '@react-navigation/native';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Product } from './product';
 
 export interface NavigationProps extends Partial<ComponentProps<typeof NavigationContainer>> { }
 
@@ -31,7 +32,7 @@ export type BottomTabNavigatorParamList = {
 // 1: home related types
 export type HomeStackParamList = {
     Home: undefined;
-    Account: undefined;
+    Product: Product;
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> = NativeStackScreenProps<

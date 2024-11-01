@@ -16,6 +16,11 @@ export const AuthenticatedNavigator = (): ReactElement => {
                 component={BottomTabNavigator}
                 options={{ animation: 'slide_from_bottom' }}
             />
+            <Stack.Screen
+                name="Product"
+                component={BottomTabNavigator}
+                options={{ animation: 'slide_from_bottom' }}
+            />
 
         </Stack.Navigator>
     );
