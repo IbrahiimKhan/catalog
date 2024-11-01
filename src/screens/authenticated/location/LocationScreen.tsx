@@ -1,4 +1,4 @@
-import { Box, HStack, Loader, Text, VectorIcon } from '@/components';
+import { Box, Loader } from '@/components';
 import { RootState } from '@/store/store';
 import React from 'react';
 import { StyleSheet } from 'react-native';

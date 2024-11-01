@@ -1,12 +1,15 @@
 
 import { Box, Button, Card, ContentSafeAreaView, FastImage, Header, HStack, Text, VectorIcon } from '@/components';
 import useHeader from '@/hooks/useHeader';
+import { addToCart } from '@/store/services/cartSlice';
+import { RootState } from '@/store/store';
 import theme from '@/theme';
 import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { useStringHelper } from '@/utils';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface ProductScreenProps extends AuthenticatedStackNavigatorScreenProps<'Product'> { }
 
@@ -24,7 +27,21 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route 
     useHeader(ProductHeader);
     const product = route.params as Product | undefined;
     const { capitalFirstLetter } = useStringHelper();
-
+    const dispatch = useDispatch();
+    const cart = useSelector((state: RootState) => state.cart);
+    console.log(cart);
+    //handle add to cart
+    const handleAddToCart = () => {
+        if (product) {
+            const cartItem = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                quantity: 1,
+            };
+            dispatch(addToCart(cartItem));
+        }
+    };
 
 
     return (
@@ -51,7 +68,7 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route 
                         </HStack>
                         <Text textAlign="justify" mt={2}>{product?.description}</Text>
                     </Card>
-                    <Button ><Button.Text title="Add To Cart" /></Button>
+                    <Button onPress={() => handleAddToCart()}><Button.Text title="Add To Cart" /></Button>
 
                 </ContentSafeAreaView>
             </ScrollView>
