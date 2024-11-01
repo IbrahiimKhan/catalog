@@ -17,7 +17,7 @@ export const Header = ({ children }: PropsWithChildren): ReactElement => {
     const containerInsets = useSafeAreaInsetsStyle(['top'], 'margin');
 
     return (
-        <Box height={theme.sizes.minHeaderHeight} style={containerInsets} bg="background">
+        <Box height={theme.sizes.minHeaderHeight} style={containerInsets} bg="white">
             <ContentSafeAreaView height="100%" justifyContent="center">
                 <Box flexDirection="row" justifyContent="space-between" alignItems="center">
                     {children}

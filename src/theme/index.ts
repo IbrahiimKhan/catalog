@@ -5,8 +5,8 @@ import { colors } from './colors';
 import { fontFamily, fontSizes, fontWeights, textVariants } from './variants/text-variants';
 import { iconButtonVariants } from './variants/icon-button-variants';
 import { cardVariants } from './variants/card-variants';
+import { buttonVariantsBase, buttonVariantsDisabled, buttonVariantsSize, buttonVariantsText, buttonVariantsTextSize, buttonVariantsType } from './variants/button-variants';
 const { width, height } = Dimensions.get('window');
-
 const sizes = {
   full: '100%',
   width,
@@ -93,6 +93,12 @@ const theme = createTheme({
   breakpoints,
   iconButtonVariants,
   cardVariants,
+  buttonVariantsBase,
+   buttonVariantsDisabled,
+   buttonVariantsSize,
+   buttonVariantsText,
+   buttonVariantsTextSize,
+   buttonVariantsType,
 
 });
 
