@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
-import { Box, ContentSafeAreaView, Header, HStack, IconButton, ProductCard, Text } from '@/components';
+/* eslint-disable react/no-unstable-nested-components */
+import { Box, ContentSafeAreaView, Header, HStack, IconButton, Loader, ProductCard, Text } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import { useGetProductsQuery } from '@/store/services/apiSlice';
 import theme from '@/theme';
 import { Product } from '@/types/product';
 import { FlashList } from '@shopify/flash-list';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 const HomeHeader = () => (
     <Header>
@@ -38,14 +39,6 @@ const SortButtons: React.FC<SortButtonsProps> = ({ sort, onSortChange }) => (
     </HStack>
 );
 
-const LoadingIndicator: React.FC = () => (
-    <ActivityIndicator size="large" color={theme.colors.black} />
-);
-
-const ErrorMessage: React.FC = () => (
-    <Text>Error fetching Products</Text>
-);
-
 export const HomeScreen: React.FC = () => {
     useHeader(HomeHeader);
     const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
@@ -55,8 +48,10 @@ export const HomeScreen: React.FC = () => {
         setQParams({ limit: 10, sort: sortOrder });
     };
 
-    if (isLoading) { return <LoadingIndicator />; }
-    if (error) { return <ErrorMessage />; }
+    if (isLoading) { return <Loader />; }
+    if (error) {
+        return <Text variant="heading2" textAlign="center" color="danger"> Something Went Wrong!</Text>;
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -69,6 +64,9 @@ export const HomeScreen: React.FC = () => {
                     ItemSeparatorComponent={() => <Box height={10} />}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={() => <Box flex={1} alignItems="center" justifyContent="center">
+                        <Text>No Product Found!</Text>
+                    </Box>}
                     estimatedItemSize={theme.sizes.width / 2}
                     numColumns={2}
                     data={products}
