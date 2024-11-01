@@ -10,6 +10,7 @@ import Geolocation from '@react-native-community/geolocation';
 import { FlashList } from '@shopify/flash-list';
 import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid, Platform, SafeAreaView, StyleSheet } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
 interface HomeScreenProps extends HomeStackScreenProps<'Home'> { }
@@ -68,7 +69,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                     getCurrentLocation();
                 } else {
-                    console.log('Location permission denied');
+                    Toast.show({ type: 'error', text1: 'Location permission denied' });
                 }
             } else {
                 getCurrentLocation();
@@ -78,12 +79,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         const getCurrentLocation = () => {
             Geolocation.getCurrentPosition(
                 (position) => {
-                    console.log(position, 'what is postion');
                     const { latitude, longitude } = position.coords;
                     dispatch(setLocation({ latitude, longitude }));
                 },
                 (error: any) => {
-                    console.error(error.message);
+                    return error;
                 },
                 { enableHighAccuracy: true, timeout: 30000, maximumAge: 10000 }
             );

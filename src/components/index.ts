@@ -14,3 +14,4 @@ export * from './ui/activity/Loader';
 export * from './ui/forms/Button';
 
 export * from './organisms/ProductCard';
+export * from './organisms/CartCard';

@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { Navigator } from './navigators';
 import store, { persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import Toast from 'react-native-toast-message';
 
 export const App = (): ReactElement => {
   return (
@@ -17,6 +18,7 @@ export const App = (): ReactElement => {
         <ThemeProvider theme={theme}>
           <SafeAreaProvider>
             <Navigator />
+            <Toast />
           </SafeAreaProvider>
         </ThemeProvider>
       </PersistGate>

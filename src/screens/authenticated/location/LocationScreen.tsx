@@ -7,9 +7,6 @@ import { useSelector } from 'react-redux';
 
 export const LocationScreen: React.FC = () => {
     const location = useSelector((state: RootState) => state.location);
-
-    console.log(location);
-
     const initialRegion = {
         latitude: location?.latitude || 0,
         longitude: location?.longitude || 0,

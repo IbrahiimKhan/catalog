@@ -2,14 +2,15 @@
 import { Box, Button, Card, ContentSafeAreaView, FastImage, Header, HStack, Text, VectorIcon } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import { addToCart } from '@/store/services/cartSlice';
-import { RootState } from '@/store/store';
 import theme from '@/theme';
-import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
+import { AuthenticatedStackNavigatorScreenProps, BottomTabNavigatorScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { useStringHelper } from '@/utils';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
 
 interface ProductScreenProps extends AuthenticatedStackNavigatorScreenProps<'Product'> { }
 
@@ -23,13 +24,12 @@ const ProductHeader = () => (
 );
 
 
-export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route }) => {
+export const ProductScreen: React.FC<ProductScreenProps> = ({ route }) => {
     useHeader(ProductHeader);
     const product = route.params as Product | undefined;
     const { capitalFirstLetter } = useStringHelper();
     const dispatch = useDispatch();
-    const cart = useSelector((state: RootState) => state.cart);
-    console.log(cart);
+    const navigation = useNavigation<BottomTabNavigatorScreenProps<'CartStack'>>();
     //handle add to cart
     const handleAddToCart = () => {
         if (product) {
@@ -38,8 +38,11 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route 
                 title: product.title,
                 price: product.price,
                 quantity: 1,
+                image: product.image,
             };
             dispatch(addToCart(cartItem));
+            Toast.show({ type: 'success', text1: 'Added to cart successfully' });
+            navigation.navigate('CartStack');
         }
     };
 
