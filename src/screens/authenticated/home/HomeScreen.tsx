@@ -78,7 +78,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         const getCurrentLocation = () => {
             Geolocation.getCurrentPosition(
                 (position) => {
-                    console.log(position);
+                    console.log(position, 'what is postion');
                     const { latitude, longitude } = position.coords;
                     dispatch(setLocation({ latitude, longitude }));
                 },
