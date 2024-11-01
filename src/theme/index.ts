@@ -64,6 +64,7 @@ const borderRadii = {
   'rounded-xl': 24,
   'rounded-xxl': 28,
   'rounded-hu': 33,
+  'rounded-xhu': 50,
   'rounded-full': 9999,
 };
 

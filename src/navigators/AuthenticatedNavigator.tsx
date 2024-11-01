@@ -5,6 +5,7 @@ import React, { type ReactElement } from 'react';
 import { type AuthenticatedStackNavigatorParamList } from '@/types/navigation';
 
 import { BottomTabNavigator } from './BottomTabNavigator';
+import { ProductScreen } from '@/screens/authenticated/product';
 
 const Stack = createNativeStackNavigator<AuthenticatedStackNavigatorParamList>();
 
@@ -18,8 +19,8 @@ export const AuthenticatedNavigator = (): ReactElement => {
             />
             <Stack.Screen
                 name="Product"
-                component={BottomTabNavigator}
-                options={{ animation: 'slide_from_bottom' }}
+                component={ProductScreen}
+                options={{ animation: 'slide_from_right' }}
             />
 
         </Stack.Navigator>

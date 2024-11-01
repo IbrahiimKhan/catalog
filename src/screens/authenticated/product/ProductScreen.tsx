@@ -1,31 +1,55 @@
 
-import { ContentSafeAreaView, Header, HStack, IconButton } from '@/components';
+import { Box, Card, ContentSafeAreaView, FastImage, Header, HStack, IconButton, Text, VectorIcon } from '@/components';
 import useHeader from '@/hooks/useHeader';
-import { useGetProductsQuery } from '@/store/services/apiSlice';
-import React, { useState } from 'react';
+import theme from '@/theme';
+import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
+import { Product } from '@/types/product';
+import { useStringHelper } from '@/utils';
+import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
+
+interface ProductScreenProps extends AuthenticatedStackNavigatorScreenProps<'Product'> { }
 
 
 const ProductHeader = () => (
     <Header>
-        <Header.Content title="Hello User" subTitle="Let's start shopping!" />
-        <Header.Action name="bells" type="ant" color="primary" onPress={() => { }} size={7} />
+        <Header.BackAction />
     </Header>
 );
 
 
-export const ProductScreen: React.FC = () => {
+export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route }) => {
     useHeader(ProductHeader);
-    const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
-    const { data: products, error, isLoading } = useGetProductsQuery(qParams);
-    const dispatch = useDispatch();
-
-
+    const product = route.params as Product | undefined;
+    const { capitalFirstLetter } = useStringHelper();
 
     return (
         <SafeAreaView style={styles.container}>
-            <ContentSafeAreaView flex={1} />
+            <Box bg="primary" width={theme.sizes.width} height={theme.sizes.width} backgroundColor="white" alignItems="center" pt={10} borderBottomLeftRadius="rounded-xhu" borderBottomRightRadius="rounded-xhu" >
+                <FastImage source={{ uri: product?.image }} width={theme.sizes.width} height={theme.sizes.width / 1.2} resizeMode="contain" />
+                <Box position="absolute" right={0} top={0} >
+                    <IconButton name="heart" type="ant" color="primary" size={14} />
+                </Box>
+            </Box>
+            <ContentSafeAreaView paddingTop={5}>
+                <Card padding={4}>
+                    <Text variant="heading2">{product?.title}</Text>
+                    <HStack justifyContent="space-between">
+                        <Text variant="heading1" color="primary" fontWeight={900} >$ {product?.price}</Text>
+                        <Box bg="primary" borderRadius="rounded-full" paddingHorizontal={3}>
+                            <Text color="white">{capitalFirstLetter(product?.category as string)}</Text>
+                        </Box>
+                    </HStack>
+                    <HStack gap={2} py={5}>
+                        {Array.from({ length: Math.floor(product?.rating.rate as number) }).map((_, index) => (
+                            <Box key={index}>
+                                <VectorIcon color="warning" name="star" type="ant" />
+                            </Box>
+                        ))}
+                    </HStack>
+                    <Text textAlign="justify" mt={2}>{product?.description}</Text>
+                </Card>
+            </ContentSafeAreaView>
         </SafeAreaView>
     );
 };

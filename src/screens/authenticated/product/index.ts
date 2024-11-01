@@ -1,1 +1,1 @@
-expor
+export * from './ProductScreen'

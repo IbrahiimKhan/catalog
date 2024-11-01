@@ -19,6 +19,7 @@ export type RootNavigatorParamList = {
 
 export type AuthenticatedStackNavigatorParamList = {
     Root: NavigatorScreenParams<BottomTabNavigatorParamList>;
+    Product: undefined
 };
 
 //all screen params for bottom tab
