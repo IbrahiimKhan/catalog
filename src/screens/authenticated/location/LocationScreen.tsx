@@ -1,4 +1,4 @@
-import { Box, Loader } from '@/components';
+import { Box, HStack, Loader, Text, VectorIcon } from '@/components';
 import { RootState } from '@/store/store';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -13,7 +13,7 @@ export const LocationScreen: React.FC = () => {
     const initialRegion = {
         latitude: location?.latitude || 0,
         longitude: location?.longitude || 0,
-        latitudeDelta: 0.0922,
+        latitudeDelta: 0.0062,
         longitudeDelta: 0.0421,
     };
 
