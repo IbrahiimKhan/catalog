@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { type FC, type ReactElement } from 'react';
 import { type TextStyle, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -20,6 +21,9 @@ import { HistoryStack } from './stacks/HistoryStack';
 import { CartStack } from './stacks/CartStack';
 import { IconButton } from '@/components';
 import { LocationStack } from './stacks/LocationStack';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { CartItem } from '@/types/cart';
 
 const BottomTabIcon = ({
     focused,
@@ -38,7 +42,7 @@ const BottomTabIcon = ({
             {...(focused && { iconStyle: 'contained' })}
             name={camelize(icon)}
             color={focused ? 'primary' : 'secondary300'}
-            size={8}
+            size={focused ? 8 : 9}
         />
     );
 };
@@ -49,6 +53,7 @@ interface BottomTabNavigatorProps extends AuthenticatedStackNavigatorScreenProps
 
 export const BottomTabNavigator: FC<BottomTabNavigatorProps> = (): ReactElement => {
     const { bottom } = useSafeAreaInsets();
+    const cart = useSelector((state: RootState) => state.cart.items);
 
     const screenOptions = ({
         route,
@@ -73,6 +78,7 @@ export const BottomTabNavigator: FC<BottomTabNavigatorProps> = (): ReactElement 
                 component={HomeStack}
             />
             <Tab.Screen
+                options={{ tabBarBadge: cart.length }}
                 name="CartStack"
                 component={CartStack}
             />

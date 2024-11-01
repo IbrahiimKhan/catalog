@@ -2,7 +2,6 @@ import { addToCart, removeFromCart } from '@/store/services/cartSlice';
 import { useTheme } from '@/theme/theme-provider';
 import { CartItem } from '@/types/cart';
 import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Clickable from '../ui/forms/Clickable';
 import Card from '../ui/layout/Card';
@@ -50,4 +49,3 @@ export const CartCard: FC<CartCardProps> = ({ item }) => {
 
 export default CartCard;
 
-const styles = StyleSheet.create({});

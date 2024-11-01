@@ -50,7 +50,7 @@ export const CartScreen: React.FC<CartScreenProps> = ({ }) => {
                     </HStack>
                     <HStack>
                         <Text variant="heading3">Total Price: </Text>
-                        <Text variant="heading3" fontWeight={900}>{totalPrice}</Text>
+                        <Text variant="heading3" fontWeight={900}>${totalPrice}</Text>
                     </HStack>
                 </Card >
             </ContentSafeAreaView>
