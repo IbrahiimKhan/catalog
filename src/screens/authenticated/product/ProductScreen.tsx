@@ -1,5 +1,5 @@
 
-import { Box, Button, Card, ContentSafeAreaView, FastImage, Header, HStack, IconButton, Text, VectorIcon } from '@/components';
+import { Box, Button, Card, ContentSafeAreaView, FastImage, Header, HStack, Text, VectorIcon } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import theme from '@/theme';
 import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
@@ -25,6 +25,8 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route 
     const product = route.params as Product | undefined;
     const { capitalFirstLetter } = useStringHelper();
 
+
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
@@ -49,7 +51,8 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ navigation, route 
                         </HStack>
                         <Text textAlign="justify" mt={2}>{product?.description}</Text>
                     </Card>
-                    <Button><Button.Text title="Add To Cart" /></Button>
+                    <Button ><Button.Text title="Add To Cart" /></Button>
+
                 </ContentSafeAreaView>
             </ScrollView>
         </SafeAreaView>

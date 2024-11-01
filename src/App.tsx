@@ -8,14 +8,17 @@ import { Navigator } from './navigators';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export const App = (): ReactElement => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <SafeAreaProvider>
-          <Navigator />
-        </SafeAreaProvider>
+        <GestureHandlerRootView>
+          <SafeAreaProvider>
+            <Navigator />
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
       </ThemeProvider>
     </Provider>
   );
