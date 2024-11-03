@@ -10,6 +10,8 @@ import {
     type LayoutProps,
     opacity,
     type OpacityProps,
+    position,
+    PositionProps,
     spacing,
     type SpacingProps,
     type VariantProps,
@@ -26,6 +28,7 @@ export type CardProps = VariantProps<Theme, 'cardVariants'> &
     BorderProps<Theme> &
     BackgroundColorProps<Theme> &
     OpacityProps<Theme> &
+    PositionProps<Theme> &
     PropsWithChildren;
 
 const variant = createVariant<Theme, 'cardVariants'>({ themeKey: 'cardVariants' });
@@ -36,6 +39,7 @@ const RestyleView = createRestyleComponent<CardProps, Theme>([
     border,
     backgroundColor,
     opacity,
+    position,
     variant,
 ]);
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Box, ContentSafeAreaView, ProductCard, Text } from '@/components';
+import { Box, ContentSafeAreaView, Loader, ProductCard, Text } from '@/components';
 import useHeader from '@/hooks/useHeader';
 import { RootState } from '@/store/store';
 import theme from '@/theme';
@@ -8,7 +8,7 @@ import { Product } from '@/types/product';
 import { monitorConnectionStatus } from '@/utils/connectionHelper';
 import { useNavigation } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { HistoryHeader } from './HistoryHeader';
@@ -17,11 +17,17 @@ interface HistoryScreenProps extends HistoryStackScreenProps<'History'> { }
 
 export const HistoryScreen: React.FC<HistoryScreenProps> = ({ }) => {
     const navigation = useNavigation();
-    useHeader(HistoryHeader);
+    useHeader(() => (
+        <Suspense fallback={<Loader />}>
+            <HistoryHeader />
+        </Suspense>
+    ));
+
     const products = useSelector((state: RootState) => state.cachedProducts.products);
     const dispatch = useDispatch();
     const isConnected = useSelector((state: RootState) => state.connection.isConnected);
 
+    // side effect of the conntions
     useEffect(() => {
         const unsubscribe = monitorConnectionStatus(dispatch);
         return () => unsubscribe();

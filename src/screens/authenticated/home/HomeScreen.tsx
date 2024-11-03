@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
     Box,
+    Card,
     ContentSafeAreaView,
     HStack,
     Loader,
@@ -23,31 +24,57 @@ import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeHeader } from './HomeHeader';
 import { SortButtons } from './SortButtons';
+import { formatTimestamp, startTimestampTimer, stopTimestampTimer, subscribeToTimestamps } from '@/utils/timeStampHelper';
 
 interface HomeScreenProps extends HomeStackScreenProps<'Home'> { }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
+    const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
+    const { data: products, error, isLoading } = useGetProductsQuery(qParams);
+    const dispatch = useDispatch();
+    const isConnected = useSelector((state: RootState) => state.connection.isConnected);
+    const [timestamp, setTimestamp] = useState<number | null>(null);
     const navigation = useNavigation();
+
     useHeader(() => (
         <Suspense fallback={<Loader />}>
             <HomeHeader />
         </Suspense>
     ));
 
-    const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
-    const { data: products, error, isLoading } = useGetProductsQuery(qParams);
-    const dispatch = useDispatch();
-    const isConnected = useSelector((state: RootState) => state.connection.isConnected);
 
+    //side effect for the permissions and netwroks
     useEffect(() => {
         requestLocationPermission(dispatch);
         const unsubscribe = monitorConnectionStatus(dispatch);
         return () => unsubscribe();
     }, [dispatch]);
 
+
+    //side effect for the timestamp native module
+    useEffect(() => {
+        startTimestampTimer()
+            .then((message) => console.log(message))
+            .catch((error) => console.error(error));
+
+        const subscription = subscribeToTimestamps((newTimestamp) => {
+            setTimestamp(newTimestamp);
+        });
+
+        return () => {
+            subscription.remove();
+            stopTimestampTimer()
+                .then((message) => console.log(message))
+                .catch((error) => console.error(error));
+        };
+    }, []);
+
+
+    //handle product sorting
     const handleSortChange = (sortOrder: 'asc' | 'desc') => {
         setQParams({ limit: 10, sort: sortOrder });
     };
+
 
     if (isConnected === false) {
         setTimeout(() => {
@@ -86,11 +113,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
                     data={products}
                     renderItem={({ item, index }: { item: Product; index: number }) => (
                         <Suspense fallback={<Loader />}>
-                            <ProductCard onPress={() => navigation.navigate('Product', item)} product={item} index={index} />
+                            <ProductCard onPress={() => navigation.navigate('Product', item as never)} product={item} index={index} />
                         </Suspense>
                     )}
                 />
                 <Toast />
+                <Card position="absolute" variant="elevated" bottom={10} right={3} paddingVertical={4} paddingHorizontal={3} backgroundColor="primary" >
+                    <Text color="white" variant="b3semiBold">{formatTimestamp(timestamp as number)}</Text>
+                </Card>
             </ContentSafeAreaView>
         </SafeAreaView>
     );
