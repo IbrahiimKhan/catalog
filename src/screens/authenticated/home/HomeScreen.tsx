@@ -51,21 +51,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
     }, [dispatch]);
 
 
-    //side effect for the timestamp native module
+//handle sideeffect for the native timestamp module s
     useEffect(() => {
-        startTimestampTimer()
-            .then((message) => console.log(message))
-            .catch((error) => console.error(error));
-
-        const subscription = subscribeToTimestamps((newTimestamp) => {
-            setTimestamp(newTimestamp);
+        const subscription = subscribeToTimestamps((timestamp) => {
+            setTimestamp(timestamp);
         });
 
+        startTimestampTimer();
+
         return () => {
+            stopTimestampTimer();
             subscription.remove();
-            stopTimestampTimer()
-                .then((message) => console.log(message))
-                .catch((error) => console.error(error));
         };
     }, []);
 

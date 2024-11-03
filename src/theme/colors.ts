@@ -4,16 +4,16 @@ const palette = {
     color2: '#FFFFFF',
 
     // primary colors hex
-    color3: '#F2FDF9',
-    color4: '#CBDFD8',
-    color5: '#B2CFC6',
-    color6: '#8EB9AB',
-    color7: '#79AC9B',
-    color8: '#579782',
-    color9: '#4F8976',
-    color10: '#3E6B5C',
-    color11: '#305348',
-    color12: '#253F37',
+    color3: '#FBE8D3',
+    color4: '#F9CBA0',
+    color5: '#F6A66B',
+    color6: '#F47D3D',
+    color7: '#F55C1D',
+    color8: '#F45E22',
+    color9: '#D94D1A',
+    color10: '#C44A15',
+    color11: '#A94112',
+    color12: '#8B3611',
 
     // secondary colors hex
     color13: '#EBEDEF',
