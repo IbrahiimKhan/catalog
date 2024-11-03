@@ -5,13 +5,13 @@ import theme from '@/theme';
 
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Navigator } from './navigators';
 import store, { persistor } from './store/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import Toast from 'react-native-toast-message';
-
 export const App = (): ReactElement => {
+  
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

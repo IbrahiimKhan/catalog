@@ -13,6 +13,7 @@ import apiSlice from './services/apiSlice';
 import locationReducer from './services/locationSlice';
 import cartReducer from './services/cartSlice';
 import cachedProductsReducer from './services/cachedProductsSlice';
+import connectionReducer from './services/connectionSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -31,6 +32,7 @@ const store = configureStore({
         location: locationReducer,
         cart: persistedCartReducer,
         cachedProducts:persistedCachedProductsReducer,
+        connection:connectionReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -42,4 +44,5 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
 export default store;

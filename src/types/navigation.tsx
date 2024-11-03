@@ -56,7 +56,7 @@ export type HistoryStackScreenProps<T extends keyof HistoryStackParamList> = Nat
 >;
 
 export type HistoryStackParamList = {
-    History: undefined
+    History: undefined,
 };
 
 // 3: location related types

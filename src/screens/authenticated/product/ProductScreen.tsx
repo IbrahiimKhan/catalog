@@ -30,7 +30,7 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ route }) => {
     const product = route.params as Product | undefined;
     const { capitalFirstLetter } = useStringHelper();
     const dispatch = useDispatch();
-    const navigation = useNavigation<BottomTabNavigatorScreenProps<'CartStack'>>();
+    const navigation = useNavigation();
     //handle add to cart
     const handleAddToCart = () => {
         if (product) {
@@ -43,7 +43,7 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ route }) => {
             };
             dispatch(addToCart(cartItem));
             Toast.show({ type: 'success', text1: 'Added to cart successfully' });
-            navigation.navigate('CartStack');
+            navigation.navigate('CartStack' as never);
         }
     };
 
