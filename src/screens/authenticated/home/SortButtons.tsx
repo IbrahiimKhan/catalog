@@ -7,19 +7,18 @@ interface SortButtonsProps {
 }
 
 export const SortButtons: React.FC<SortButtonsProps> = ({ sort, onSortChange }) => (
-    <HStack gap={5}>
+    <HStack gap={3}>
         <IconButton
             name="sort-asc"
             type="octicon"
-            color="primary"
-            iconStyle={sort === 'asc' ? 'contained' : 'default'}
+            color={sort === 'asc' ? 'primary' : 'black'}
             onPress={() => onSortChange('asc')}
         />
         <IconButton
             name="sort-desc"
             type="octicon"
-            color="primary"
-            iconStyle={sort === 'desc' ? 'contained' : 'default'}
+            color={sort === 'desc' ? 'primary' : 'black'}
+
             onPress={() => onSortChange('desc')}
         />
     </HStack>

@@ -4,7 +4,7 @@ import useHeader from '@/hooks/useHeader';
 import { addProductToCache } from '@/store/services/cachedProductsSlice';
 import { addToCart } from '@/store/services/cartSlice';
 import theme from '@/theme';
-import { AuthenticatedStackNavigatorScreenProps, BottomTabNavigatorScreenProps } from '@/types/navigation';
+import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { useStringHelper } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
@@ -17,9 +17,9 @@ interface ProductScreenProps extends AuthenticatedStackNavigatorScreenProps<'Pro
 
 
 const ProductHeader = () => (
-    <Header>
+    <Header>z
         <Header.BackAction />
-        <Header.Action name="heart" type="ant" color="primary" onPress={() => { }} size={7} />
+        <Header.Action name="heart" type="ant" color="white" paddingRight={3} onPress={() => { }} size={7} />
 
     </Header>
 );

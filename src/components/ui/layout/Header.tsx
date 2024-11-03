@@ -17,7 +17,7 @@ export const Header = ({ children }: PropsWithChildren): ReactElement => {
     const containerInsets = useSafeAreaInsetsStyle(['top'], 'margin');
 
     return (
-        <Box height={theme.sizes.minHeaderHeight} style={containerInsets} bg="white">
+        <Box height={theme.sizes.minHeaderHeight} style={containerInsets} bg="primary" >
             <ContentSafeAreaView height="100%" justifyContent="center">
                 <Box flexDirection="row" justifyContent="space-between" alignItems="center">
                     {children}
@@ -37,8 +37,9 @@ const BackAction = ({ onPress }: { onPress?: () => void }): ReactElement => {
         <IconButton
             right={8}
             size={8}
-            type="ant"
-            name="arrowleft"
+            color="white"
+            type="materialCommunity"
+            name="chevron-left"
             onPress={onPress ?? navigateBack}
         />
     );
@@ -52,8 +53,8 @@ type ContentProps = {
 const Content = ({ title, subTitle = undefined, ...rest }: ContentProps): ReactElement => {
     return (
         <Box {...rest}>
-            <Text variant="b2bold">{title}</Text>
-            {subTitle !== undefined && <Text variant="b3medium">{subTitle}</Text>}
+            <Text variant="b2bold" color="white">{title}</Text>
+            {subTitle !== undefined && <Text variant="b3medium" color="white">{subTitle}</Text>}
         </Box>
     );
 };

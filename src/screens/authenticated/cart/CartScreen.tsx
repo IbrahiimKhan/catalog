@@ -16,7 +16,7 @@ interface CartScreenProps extends CartStackScreenProps<'Cart'> { }
 const CartHeader = () => (
     <Header>
         <Header.Content title="My Cart" subTitle="shopping cart items" />
-        <Header.Action name="bells" type="ant" color="primary" onPress={() => { }} size={7} />
+        <Header.Action name="bells" type="ant" color="white" onPress={() => { }} size={7} />
     </Header>
 );
 
@@ -43,14 +43,14 @@ export const CartScreen: React.FC<CartScreenProps> = ({ }) => {
                     renderItem={({ item }: { item: CartItem }) => <CartCard
                         item={item} />}
                 />
-                <Card width={'100%'} padding={5} variant="elevated" marginVertical={2} flexDirection="row" justifyContent="space-between" >
+                <Card width={'100%'} padding={5} variant="elevated" marginVertical={2} flexDirection="row" justifyContent="space-between" backgroundColor="primary" marginBottom={5} >
                     <HStack>
-                        <Text variant="heading3" >Total Items: </Text>
-                        <Text variant="heading3" fontWeight={900}>{totalCartItems}</Text>
+                        <Text variant="heading3" color="white" >Total Items: </Text>
+                        <Text variant="heading3" color="white" fontWeight={900}>{totalCartItems}</Text>
                     </HStack>
                     <HStack>
-                        <Text variant="heading3">Total Price: </Text>
-                        <Text variant="heading3" fontWeight={900}>${totalPrice}</Text>
+                        <Text variant="heading3" color="white" >Total Price: </Text>
+                        <Text variant="heading3" color="white" fontWeight={900}>${totalPrice}</Text>
                     </HStack>
                 </Card >
             </ContentSafeAreaView>
