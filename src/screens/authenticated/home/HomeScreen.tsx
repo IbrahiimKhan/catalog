@@ -22,7 +22,6 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import React, { Suspense, useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeHeader } from './HomeHeader';
 import { SortButtons } from './SortButtons';
@@ -118,7 +117,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         </Suspense>
                     )}
                 />
-                <Toast />
                 {isAndroid ? <Card position="absolute" variant="elevated" bottom={10} right={3} paddingVertical={4} paddingHorizontal={3} backgroundColor="primary" >
                     <Text color="white" variant="b3semiBold">{formatTimestamp(timestamp as number)}</Text>
                 </Card> : null}

@@ -17,7 +17,7 @@ interface ProductScreenProps extends HomeStackScreenProps<'Product'> { }
 
 
 const ProductHeader = () => (
-    <Header>z
+    <Header>
         <Header.BackAction />
         <Header.Action name="heart" type="ant" color="white" paddingRight={3} onPress={() => { }} size={7} />
     </Header>
@@ -76,7 +76,6 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ route }) => {
                         <Text textAlign="justify" mt={2}>{product?.description}</Text>
                     </Card>
                     <Button onPress={() => handleAddToCart()}><Button.Text title="Add To Cart" /></Button>
-
                 </ContentSafeAreaView>
             </ScrollView>
         </SafeAreaView>

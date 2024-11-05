@@ -18,7 +18,7 @@ export const App = (): ReactElement => {
         <ThemeProvider theme={theme}>
           <SafeAreaProvider>
             <Navigator />
-            <Toast />
+            <Toast visibilityTime={700} />
           </SafeAreaProvider>
         </ThemeProvider>
       </PersistGate>
