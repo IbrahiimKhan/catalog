@@ -20,7 +20,6 @@ const ProductHeader = () => (
     <Header>z
         <Header.BackAction />
         <Header.Action name="heart" type="ant" color="white" paddingRight={3} onPress={() => { }} size={7} />
-
     </Header>
 );
 
@@ -47,7 +46,7 @@ export const ProductScreen: React.FC<ProductScreenProps> = ({ route }) => {
         }
     };
 
-    //cached proudct if viewed
+    //cache proudct if viewed
     useEffect(() => {
         dispatch(addProductToCache(product as Product));
     }, []);
