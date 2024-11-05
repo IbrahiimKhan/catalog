@@ -1,4 +1,9 @@
 {
   "name": "catalog",
-  "displayName": "catalog"
+  "displayName": "catalog",
+  "android": {
+    "permissions": [
+      "ACCESS_BACKGROUND_LOCATION"
+    ]
+  }
 }

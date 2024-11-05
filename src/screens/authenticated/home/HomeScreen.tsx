@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HomeHeader } from './HomeHeader';
 import { SortButtons } from './SortButtons';
 import { formatTimestamp, startTimestampTimer, stopTimestampTimer, subscribeToTimestamps } from '@/utils/timeStampHelper';
+import { isAndroid } from '@/contant/platform';
 
 interface HomeScreenProps extends HomeStackScreenProps<'Home'> { }
 
@@ -51,18 +52,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
     }, [dispatch]);
 
 
-//handle sideeffect for the native timestamp module s
+    //handle sideeffect for the native timestamp module s
     useEffect(() => {
-        const subscription = subscribeToTimestamps((timestamp) => {
-            setTimestamp(timestamp);
-        });
+        if (isAndroid) {
+            const subscription = subscribeToTimestamps((timestamp) => {
+                setTimestamp(timestamp);
+            });
 
-        startTimestampTimer();
+            startTimestampTimer();
 
-        return () => {
-            stopTimestampTimer();
-            subscription.remove();
-        };
+            return () => {
+                stopTimestampTimer();
+                subscription.remove();
+            };
+        }
     }, []);
 
 
@@ -114,9 +117,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
                     )}
                 />
                 <Toast />
-                <Card position="absolute" variant="elevated" bottom={10} right={3} paddingVertical={4} paddingHorizontal={3} backgroundColor="primary" >
+                {isAndroid ? <Card position="absolute" variant="elevated" bottom={10} right={3} paddingVertical={4} paddingHorizontal={3} backgroundColor="primary" >
                     <Text color="white" variant="b3semiBold">{formatTimestamp(timestamp as number)}</Text>
-                </Card>
+                </Card> : null}
             </ContentSafeAreaView>
         </SafeAreaView>
     );
