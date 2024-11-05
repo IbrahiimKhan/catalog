@@ -1,5 +1,6 @@
 import { CartItem } from '@/types/cart';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import Toast from 'react-native-toast-message';
 
 interface CartState {
     items: CartItem[];
@@ -28,6 +29,7 @@ const cartSlice = createSlice({
                     existingItem.quantity -= 1;
                 } else {
                     state.items = state.items.filter(item => item.id !== action.payload);
+                    Toast.show({type:'success',text1:'Successfully removed item'});
                 }
             }
         },
