@@ -1,6 +1,6 @@
-# rnboilerplate | Code faster with prebuild boilerplate
+# catalog | ecommerce app
 
-Project name is a `rnboilerplate` which `provides boilerplate code to kickstart your rn projct with restyle theme`.
+Project name is a `catalog` which `is a ecommerce application`.
 
 ## Prerequisites
 
@@ -21,6 +21,13 @@ To start Metro, run the following command from the _root_ of your my-care-mobile
 ```bash
 yarn start
 ```
+
+install the cocoapods for ios
+
+```bash
+yarn pod
+```
+
 
 #### Step 2: Start your Application
 
@@ -43,23 +50,3 @@ If everything is set up _correctly_, you should see your new app running in your
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
 
-## Contributing to rnboilerplate 
-<!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
-To contribute to rnboilerplate, follow these steps:
-
-1. Clone this repository.
-2. Create a branch: `git checkout -b <branch_name>`.
-3. Make your changes and commit them: `git commit -m '<commit_message>'`
-4. Push to the branch: `git push`
-5. Create the pull request.
-
-## Contributors
-
-Thanks to the following people who have contributed to rnboilerplate project:
-
-* [@IbrahiimKhan](https://github.com/IbrahiimKhan) 📖
-
-
-## Contact
-
-If you want to contact me you can reach me at <khan.ask.ibrahim@gmail.com>.
