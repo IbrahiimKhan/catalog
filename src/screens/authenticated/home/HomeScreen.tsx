@@ -8,15 +8,17 @@ import {
     ProductCard,
     Text,
 } from '@/components';
+import { isAndroid } from '@/contant/platform';
 import useHeader from '@/hooks/useHeader';
 import { useGetProductsQuery } from '@/store/services/apiSlice';
 import { RootState } from '@/store/store';
 import theme from '@/theme';
-import { HomeStackScreenProps } from '@/types/navigation';
+import { BottomTabNavigatorScreenProps, HomeStackScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { monitorConnectionStatus } from '@/utils/connectionHelper';
 import { requestLocationPermission } from '@/utils/locationHelper';
-import { useNavigation } from '@react-navigation/native';
+import { formatTimestamp, startTimestampTimer, stopTimestampTimer, subscribeToTimestamps } from '@/utils/timeStampHelper';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import React, { Suspense, useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
@@ -24,18 +26,18 @@ import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeHeader } from './HomeHeader';
 import { SortButtons } from './SortButtons';
-import { formatTimestamp, startTimestampTimer, stopTimestampTimer, subscribeToTimestamps } from '@/utils/timeStampHelper';
-import { isAndroid } from '@/contant/platform';
 
-interface HomeScreenProps extends HomeStackScreenProps<'Home'> { }
+interface HomeScreenProps extends CompositeScreenProps<
+    HomeStackScreenProps<'Home'>,
+    BottomTabNavigatorScreenProps<'HistoryStack'>
+> { }
 
-export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
+export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const [qParams, setQParams] = useState<{ limit: number; sort: 'asc' | 'desc' }>({ limit: 10, sort: 'asc' });
     const { data: products, error, isLoading } = useGetProductsQuery(qParams);
     const dispatch = useDispatch();
     const isConnected = useSelector((state: RootState) => state.connection.isConnected);
     const [timestamp, setTimestamp] = useState<number | null>(null);
-    const navigation = useNavigation();
 
     useHeader(() => (
         <Suspense fallback={<Loader />}>
@@ -112,7 +114,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ }) => {
                     data={products}
                     renderItem={({ item, index }: { item: Product; index: number }) => (
                         <Suspense fallback={<Loader />}>
-                            <ProductCard onPress={() => navigation.navigate('Product', item as never)} product={item} index={index} />
+                            <ProductCard onPress={() => navigation.navigate('Product', item)} product={item} index={index} />
                         </Suspense>
                     )}
                 />

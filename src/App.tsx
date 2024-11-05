@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Navigator } from './navigators';
 import store, { persistor } from './store/store';
 export const App = (): ReactElement => {
-  
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

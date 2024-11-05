@@ -4,7 +4,7 @@ import useHeader from '@/hooks/useHeader';
 import { addProductToCache } from '@/store/services/cachedProductsSlice';
 import { addToCart } from '@/store/services/cartSlice';
 import theme from '@/theme';
-import { AuthenticatedStackNavigatorScreenProps } from '@/types/navigation';
+import { HomeStackScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { useStringHelper } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
@@ -13,7 +13,7 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
-interface ProductScreenProps extends AuthenticatedStackNavigatorScreenProps<'Product'> { }
+interface ProductScreenProps extends HomeStackScreenProps<'Product'> { }
 
 
 const ProductHeader = () => (

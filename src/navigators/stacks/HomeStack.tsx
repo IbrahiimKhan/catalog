@@ -1,11 +1,11 @@
 import { HomeScreen } from '@/screens/authenticated/home';
-import { HomeStackParamList } from '@/types/navigation';
-import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabNavigatorScreenProps, HomeStackParamList } from '@/types/navigation';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
-export const HomeStack: FC<NativeStackScreenProps<HomeStackParamList>> = () => {
+export const HomeStack: FC<BottomTabNavigatorScreenProps<'HomeStack'>> = () => {
     return (
         <Stack.Navigator
             screenOptions={{
