@@ -7,11 +7,8 @@
   3. Created a product details screen.
   4. Rendered a map with the user’s current location with react native map.
 
-  to get the actial coordinates:
+  to get the actial coordinates on emulator/simulator:
 
-    That is the correct behavior on the iOS simulator (and the Android emulator). You can change the mocked coordinates for geolocation on each like so (paraphrased from other answers):
-
-    iOS
 
     Run app in iOS simulator.
     At the top menu bar, you'll find Features -> Location -> Custom Location..(or you can choose to use others).
@@ -24,14 +21,14 @@
     5. Developed a cart screen with quantity adjustment with redux store and slices.
 
 - **Thought Process**: Focused on establishing core functionality and ensuring smooth interaction with API by rtk query . Did setup the redux store to persist cart item.
-- **Challenges**: Handling geolocation permissions on different platform and implementing map integration.
+- **Challenges**: Handling geolocation permissions and enabling/ disabling device locations on different platform and implementing map integration.
 
 ## Phase 2: Offline Support and Caching
 - **Completed**:
   1. Enabled offline caching of viewed products.
   2. Created a "History" screen for offline access to past products.
   3. Implemented network change detection to handle offline/online transitions.
-  4. To check this feature, if you are on emulator please go on //off the airplane mode.
+  4. To check this feature, if you are on emulator please go on/off the airplane mode.
 
 - **Thought Process**: Cached viewed products for seamless offline access.
 - **Challenges**: Ensuring data syncing works smoothly when coming back online or going back again to offline.

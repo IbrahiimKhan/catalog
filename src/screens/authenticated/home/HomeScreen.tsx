@@ -16,7 +16,7 @@ import theme from '@/theme';
 import { BottomTabNavigatorScreenProps, HomeStackScreenProps } from '@/types/navigation';
 import { Product } from '@/types/product';
 import { monitorConnectionStatus } from '@/utils/connectionHelper';
-import { requestLocationPermission } from '@/utils/locationHelper';
+import { handleEnabledLocation } from '@/utils/locationHelper';
 import { formatTimestamp, startTimestampTimer, stopTimestampTimer, subscribeToTimestamps } from '@/utils/timeStampHelper';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
@@ -47,7 +47,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
     //side effect for the permissions and netwroks
     useEffect(() => {
-        requestLocationPermission(dispatch);
+        handleEnabledLocation(dispatch);
         const unsubscribe = monitorConnectionStatus(dispatch);
         return () => unsubscribe();
     }, [dispatch]);

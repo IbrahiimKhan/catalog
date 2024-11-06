@@ -3,6 +3,28 @@ import Geolocation from '@react-native-community/geolocation';
 import { PermissionsAndroid, Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 
+import {
+    promptForEnableLocationIfNeeded,
+} from 'react-native-android-location-enabler';
+
+
+
+ export const   handleEnabledLocation = async(dispatch:any) =>{
+    if (Platform.OS === 'android') {
+      try {
+      const enabled =  await promptForEnableLocationIfNeeded();
+      if (enabled) {
+       await requestLocationPermission(dispatch);
+      }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+            Toast.show({type:'error',text1:"Could'nt turn on location"});
+        }
+      }
+    }
+  };
+
+
 export const requestLocationPermission = async (dispatch: any) => {
     if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -36,6 +58,5 @@ export const getCurrentLocation = (dispatch: any) => {
         (error) => {
             Toast.show({ type: 'error', text1: 'Error getting location', text2: error.message });
         },
-        { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
     );
 };
